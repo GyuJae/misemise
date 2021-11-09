@@ -56,7 +56,9 @@ const AirCurrent = () => {
         </Container>
       </ScrollView>
       <FixedWeather width={width}>
-        <Weather />
+        <ScrollView>
+          <Weather />
+        </ScrollView>
       </FixedWeather>
     </View>
   );

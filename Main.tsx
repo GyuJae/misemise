@@ -10,12 +10,13 @@ import { useStation } from "./contexts/MeasuringStation.context";
 import { useDailys } from "./contexts/DailyContext";
 import { useLocation } from "./contexts/Location.context";
 import { useWeathers } from "./contexts/Weather.context";
+import NotPerMisson from "./components/NotPerMisson";
 
 const Container = styled.View``;
 
 const Main = () => {
   const [loading, setLoading] = useState<boolean>(true);
-  const [permission, setPermission] = useState<boolean>(false);
+  const [permission, setPermission] = useState<boolean>(true);
   const { setDailys } = useDailys();
   const { setStation } = useStation();
   const { setLocation } = useLocation();
@@ -46,6 +47,7 @@ const Main = () => {
       setStation(MeasuringStation);
       const data: IDaily[] = await getAirData(MeasuringStation.stationName);
       setDailys(data);
+
       const weatherData: IWeatherDaily[] = await getWeatherData(
         latitude,
         longitude
@@ -61,7 +63,11 @@ const Main = () => {
   useEffect(() => {
     getData();
   }, []);
-  return <Container>{loading ? <Loading /> : <AirCurrent />}</Container>;
+  return (
+    <Container>
+      {loading ? <Loading /> : permission ? <AirCurrent /> : <NotPerMisson />}
+    </Container>
+  );
 };
 
 export default Main;

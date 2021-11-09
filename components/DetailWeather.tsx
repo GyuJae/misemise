@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, ScrollView } from "react-native";
+import { Dimensions, ScrollView, TouchableOpacity, View } from "react-native";
 import styled from "styled-components/native";
 import { useWeathers } from "../contexts/Weather.context";
 import Text from "../styled/Text";
@@ -12,8 +12,11 @@ import {
 import { AntDesign } from "@expo/vector-icons";
 import AnotherWeatherItem from "./AnotherWeatherItem";
 import { Fontisto } from "@expo/vector-icons";
+import MoreWeather from "./MoreWeather";
+import Face from "./Face";
+import { useDailys } from "../contexts/DailyContext";
 
-const Container = styled.View<{
+const ContainerView = styled.View<{
   width: number;
   height: number;
   backgroundColor: string;
@@ -26,22 +29,48 @@ const Container = styled.View<{
   border-top-right-radius: 15px;
 `;
 
-const WeatherIcon = styled.Image`
-  width: 220px;
-  height: 170px;
-`;
-
-const DeleteBtn = styled.TouchableOpacity`
-  position: absolute;
-  right: 23px;
-  top: 20px;
-`;
-
 const MinMaxTemp = styled.Text`
   color: white;
   font-weight: 800;
-  font-size: 16px;
+  font-size: 14px;
   margin-bottom: 20px;
+`;
+
+const MainContainer = styled.View`
+  justify-content: center;
+  align-items: center;
+`;
+
+const Temp = styled.Text`
+  font-size: 18px;
+  color: white;
+  margin-left: 7px;
+`;
+
+const MainName = styled.View`
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+`;
+
+const MainText = styled.Text`
+  font-size: 10px;
+  color: white;
+`;
+
+const DetailMiseMiseContainer = styled.View<{
+  height: number;
+  width: number;
+  backgroundColor: string;
+}>`
+  height: ${(props) => `${props.height}px`};
+  width: ${(props) => `${props.width}px`};
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  background-color: ${(props) => props.backgroundColor};
 `;
 
 const DetailWeather = ({
@@ -52,42 +81,85 @@ const DetailWeather = ({
   const { width, height } = Dimensions.get("window");
   const { weathers } = useWeathers();
   const main = weathers[0].weather[0].main;
+  const { dailys } = useDailys();
+  const content = (): string => {
+    if (dailys[0].khaiGrade === "1") {
+      return "좋음";
+    } else if (dailys[0].khaiGrade === "2") {
+      return "보통";
+    } else if (dailys[0].khaiGrade === "3") {
+      return "나쁨";
+    }
+    return "아주 나쁨";
+  };
   return (
-    <Container
-      height={height / 1.7}
+    <ContainerView
+      height={height}
       width={width}
       backgroundColor={weatherMainBackgroundColors[main]}
     >
-      <DeleteBtn onPress={() => setDetail(false)}>
-        <AntDesign name="closecircle" size={20} color="white" />
-      </DeleteBtn>
-      <Text content={weathersMain[main]} fontSize={28} marginTop={28} />
-      <Fontisto
-        name={icons[weathers[0].weather[0].main]}
-        size={120}
-        color="white"
-        style={{
-          marginTop: 20,
-          marginBottom: 20,
-        }}
-      />
-      <Text content={weathers[0].temp.day + "°"} fontSize={40} />
-      <MinMaxTemp>
-        최고 {weathers[0].temp.max.toFixed(0)}º / 최저{" "}
-        {weathers[0].temp.min.toFixed(0)}º
-      </MinMaxTemp>
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        style={{
-          backgroundColor: weatherBackgroundColors[main],
-        }}
-      >
-        {weathers.map((weather, idx) => (
-          <AnotherWeatherItem key={idx} {...weather} />
-        ))}
+      <ScrollView>
+        <MainContainer>
+          <Text content={weathersMain[main]} fontSize={28} marginTop={28} />
+          <Fontisto
+            name={icons[weathers[0].weather[0].main]}
+            size={120}
+            color="white"
+            style={{
+              marginTop: 20,
+              marginBottom: 20,
+            }}
+          />
+          <Text content={weathers[0].temp.day + "°"} fontSize={40} />
+          <MinMaxTemp>
+            최고 {weathers[0].temp.max.toFixed(0)}º / 최저{" "}
+            {weathers[0].temp.min.toFixed(0)}º
+          </MinMaxTemp>
+        </MainContainer>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={{
+            backgroundColor: weatherBackgroundColors[main],
+          }}
+        >
+          {weathers.map((weather, idx) => (
+            <AnotherWeatherItem key={idx} {...weather} />
+          ))}
+        </ScrollView>
+        <MoreWeather />
       </ScrollView>
-    </Container>
+      <TouchableOpacity onPress={() => setDetail(false)}>
+        <DetailMiseMiseContainer
+          height={60}
+          width={width}
+          backgroundColor={
+            dailys[0].khaiGrade === "1"
+              ? "#0277BD"
+              : dailys[0].khaiGrade === "2"
+              ? "#0098A6"
+              : dailys[0].khaiGrade === "3"
+              ? "#EF6C00"
+              : "#C62827"
+          }
+        >
+          <MainName>
+            <MainText>미세먼지</MainText>
+          </MainName>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Face size={50} />
+            <Temp>{content()}</Temp>
+          </View>
+          <AntDesign name="upcircle" size={24} color="white" />
+        </DetailMiseMiseContainer>
+      </TouchableOpacity>
+    </ContainerView>
   );
 };
 

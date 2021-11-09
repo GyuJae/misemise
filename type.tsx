@@ -82,3 +82,15 @@ export interface IWeatherDaily {
   wind_gust: number;
   wind_speed: number;
 }
+export interface IAirForecast {
+  frcstOneCn: string;
+  frcstTwoCn: string;
+  frcstThreeCn: string;
+  frcstFourCn: string;
+  presnatnDt: string;
+  frcstOneDt: string;
+  frcstTwoDt: string;
+  frcstThreeDt: string;
+  frcstFourDt: string;
+  gwthcnd: string;
+}

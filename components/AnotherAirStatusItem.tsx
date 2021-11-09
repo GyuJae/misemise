@@ -29,8 +29,8 @@ const AnotherAirStatusItem: React.FC<IAnotherAirStatusItem> = ({
   return (
     <Container height={120} width={width / 3.3}>
       <Text content={dustName} fontSize={13} />
-      <Face wantGrade={wantGrade} size={35} marginTop={6} />
-      <Text content={content()} fontSize={16} marginTop={5} />
+      <Face wantGrade={wantGrade} size={50} marginTop={0} />
+      <Text content={content()} fontSize={16} marginTop={0} />
       <Text content={dustValue} fontSize={12} />
     </Container>
   );

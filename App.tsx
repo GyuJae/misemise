@@ -7,6 +7,7 @@ import { DailyProvider } from "./contexts/DailyContext";
 import Main from "./Main";
 import { LocationProvider } from "./contexts/Location.context";
 import { WeatherProvider } from "./contexts/Weather.context";
+import { AirForecastProvider } from "./contexts/AirForecast.context";
 
 export default function App() {
   return (
@@ -14,10 +15,12 @@ export default function App() {
       <MeasuringStationProvider>
         <LocationProvider>
           <DailyProvider>
-            <WeatherProvider>
-              <StatusBar barStyle="default" />
-              <Main />
-            </WeatherProvider>
+            <AirForecastProvider>
+              <WeatherProvider>
+                <StatusBar barStyle="default" />
+                <Main />
+              </WeatherProvider>
+            </AirForecastProvider>
           </DailyProvider>
         </LocationProvider>
       </MeasuringStationProvider>

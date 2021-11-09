@@ -47,6 +47,31 @@ export const getAirData = async (stationName: string) => {
   }
 };
 
+export const getAirForecast = async (searchDate: string) => {
+  try {
+    const {
+      data: {
+        response: {
+          body: { items },
+        },
+      },
+    } = await axios.get(
+      "http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMinuDustWeekFrcstDspth",
+      {
+        params: {
+          serviceKey:
+            "X7VhRALdifkkGij+LfmVbmnXX5dXWIUTQR7Ud4kOJ2qb5J3X5ZeQny+wahpR3ok1loY6K+2FMIHpRvJP2LPlZQ==",
+          returnType: "json",
+          searchDate,
+        },
+      }
+    );
+    return items;
+  } catch {
+    alert("air data error");
+  }
+};
+
 export const getWeatherData = async (latitude: number, longitude: number) => {
   const { daily } = await fetch(
     `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=alerts&appid=${REACT_APP_API_WEATHER_KEY}&units=metric`

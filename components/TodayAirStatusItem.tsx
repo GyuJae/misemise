@@ -33,8 +33,8 @@ const TodayAirStatusItem: React.FC<ITodayAirStatusItem> = ({
   return (
     <ContanerView width={width / 6}>
       <Text fontSize={13} content={dataTime.split(" ")[1]} />
-      <Face size={30} wantGrade={khaiGrade} marginTop={5} />
-      <Text fontSize={15} content={content()} marginTop={5} />
+      <Face size={40} wantGrade={khaiGrade} marginTop={0} />
+      <Text fontSize={15} content={content()} marginTop={0} />
     </ContanerView>
   );
 };

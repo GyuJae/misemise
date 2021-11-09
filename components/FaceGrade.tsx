@@ -19,8 +19,8 @@ const FaceGrade = () => {
   };
   return (
     <Container height={300}>
-      <Face size={200} />
-      <Text fontSize={35} content={content()} marginTop={18} />
+      <Face size={240} />
+      <Text fontSize={30} content={content()} marginTop={-15} />
     </Container>
   );
 };
