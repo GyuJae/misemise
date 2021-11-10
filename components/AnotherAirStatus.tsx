@@ -1,6 +1,7 @@
 import React from "react";
 import { Dimensions, ScrollView } from "react-native";
 import styled from "styled-components/native";
+import { useDailys } from "../contexts/DailyContext";
 import Container from "../styled/Container";
 import { IDaily } from "../type";
 import AnotherAirStatusItem from "./AnotherAirStatusItem";
@@ -23,9 +24,7 @@ const ContainerView = styled.View<{
       ? props.theme.subColor.common
       : props.grade === "3"
       ? props.theme.subColor.bad
-      : props.grade
-      ? props.theme.subColor.veryBad
-      : "null"};
+      : props.theme.subColor.veryBad};
 `;
 
 const AnotherAirStatus: React.FC<IDaily> = ({

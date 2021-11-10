@@ -19,6 +19,6 @@ export const theme: DefaultTheme = {
     good: "#039BE6",
     common: "#00BCD5",
     bad: "#FB8C00",
-    veryBad: "#C62D2D",
+    veryBad: "#d33e3e",
   },
 };

@@ -11,7 +11,7 @@ import Text from "../styled/Text";
 const ContainerView = styled.View<{ width: number; backgroundColor: string }>`
   width: ${(props) => `${props.width}px`};
   background-color: ${(props) => props.backgroundColor};
-  height: 480px;
+  height: 495px;
   margin-top: 20px;
   border-radius: 20px;
   margin-bottom: 20px;
@@ -31,6 +31,12 @@ const IconContainer = styled.View`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+`;
+
+const Icon = styled.Image`
+  width: 55px;
+  height: 50px;
+  margin-right: 7px;
 `;
 
 const MoreWeatherItem = () => {
@@ -55,14 +61,7 @@ const MoreWeatherItem = () => {
     >
       <ItemContainer width={width / 1.05} border={false}>
         <IconContainer>
-          <Feather
-            name="sunrise"
-            size={45}
-            color="#fbc540"
-            style={{
-              marginRight: 10,
-            }}
-          />
+          <Icon source={require("../assets/more_weathers/sunrise.png")} />
           <Text fontSize={15} content={"일출"} />
         </IconContainer>
         <Text
@@ -75,14 +74,7 @@ const MoreWeatherItem = () => {
       </ItemContainer>
       <ItemContainer width={width / 1.05} border={true}>
         <IconContainer>
-          <Feather
-            name="sunset"
-            size={45}
-            color="#fbc540"
-            style={{
-              marginRight: 10,
-            }}
-          />
+          <Icon source={require("../assets/more_weathers/sunset.png")} />
           <Text fontSize={15} content={"일몰"} />
         </IconContainer>
         <Text
@@ -95,14 +87,7 @@ const MoreWeatherItem = () => {
       </ItemContainer>
       <ItemContainer width={width / 1.05} border={true}>
         <IconContainer>
-          <FontAwesome
-            name="sun-o"
-            size={45}
-            color="#fbc540"
-            style={{
-              marginRight: 10,
-            }}
-          />
+          <Icon source={require("../assets/more_weathers/sun.png")} />
           <Text fontSize={15} content={"자외선지수"} />
         </IconContainer>
         <Text
@@ -112,42 +97,21 @@ const MoreWeatherItem = () => {
       </ItemContainer>
       <ItemContainer width={width / 1.05} border={true}>
         <IconContainer>
-          <Ionicons
-            name="water"
-            size={45}
-            color="#63c5da"
-            style={{
-              marginRight: 10,
-            }}
-          />
+          <Icon source={require("../assets/more_weathers/water.png")} />
           <Text fontSize={15} content={"습도"} />
         </IconContainer>
         <Text fontSize={15} content={weathers[0].humidity + "%"} />
       </ItemContainer>
       <ItemContainer width={width / 1.05} border={true}>
         <IconContainer>
-          <Feather
-            name="wind"
-            size={45}
-            color="#ececec"
-            style={{
-              marginRight: 10,
-            }}
-          />
+          <Icon source={require("../assets/more_weathers/wind.png")} />
           <Text fontSize={15} content={"바람"} />
         </IconContainer>
         <Text fontSize={15} content={weathers[0].wind_speed + "m/s"} />
       </ItemContainer>
       <ItemContainer width={width / 1.05} border={true}>
         <IconContainer>
-          <Ionicons
-            name="moon"
-            size={45}
-            color="#FFE107"
-            style={{
-              marginRight: 10,
-            }}
-          />
+          <Icon source={require("../assets/more_weathers/moonrise.png")} />
           <Text fontSize={15} content={"월출"} />
         </IconContainer>
         <Text
@@ -160,14 +124,7 @@ const MoreWeatherItem = () => {
       </ItemContainer>
       <ItemContainer width={width / 1.05} border={true}>
         <IconContainer>
-          <Ionicons
-            name="moon"
-            size={45}
-            color="#FFE107"
-            style={{
-              marginRight: 10,
-            }}
-          />
+          <Icon source={require("../assets/more_weathers/moon_set.png")} />
           <Text fontSize={15} content={"월몰"} />
         </IconContainer>
         <Text

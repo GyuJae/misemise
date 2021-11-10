@@ -19,9 +19,7 @@ const ContanerView = styled.View<{ width: number; grade: string }>`
       ? props.theme.subColor.common
       : props.grade === "3"
       ? props.theme.subColor.bad
-      : props.grade
-      ? props.theme.subColor.veryBad
-      : "null"};
+      : props.theme.subColor.veryBad};
 `;
 
 const DetailContent = () => {

@@ -9,7 +9,7 @@ const LocationName = () => {
   const { location } = useLocation();
   const { dailys } = useDailys();
   return (
-    <Container height={120}>
+    <Container height={100}>
       <Text fontSize={25} content={location} />
       <Text fontSize={15} content={dailys[0].dataTime} />
     </Container>
